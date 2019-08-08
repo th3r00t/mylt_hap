@@ -28,14 +28,14 @@ const char* inTopic = "lighting/benchlight";
 
 void mqttConnect() {
   while (!mqttClient.connected()) {
-
+    digitalWrite(relayPin, HIGH);
     if (mqttClient.connect(hardwareId, "home", "A@2cb13")) {
       Serial.println("Connected");
       mqttClient.publish(outTopic, hardwareName);
       mqttClient.subscribe(inTopic);
     }
     else {
-      Serial.print("mqtt connect failed, er=");
+      Serial.print("mqtt connect failed, rc=");
       Serial.println(mqttClient.state());
     }
   }
@@ -51,15 +51,16 @@ void callback(char* topic, byte* payload, unsigned int length){
     Serial.println();
     if (i == 0 && payload[i] == '0')
     {
-      Serial.println("set LOW");
       digitalWrite(relayPin, LOW);
     }
     else if (i == 0 && payload[i] == '1')
     {
-      Serial.println("set HIGH");
       digitalWrite(relayPin, HIGH);
     }
-    Serial.println(i);
+    else if (i == 0 && payload[i] == '2'){
+      mqttClient.publish(outTopic, "1");
+      mqttClient.subscribe(inTopic);
+    }
   }
   /* DEBUG*/
   
