@@ -7,12 +7,30 @@
 <link rel="stylesheet" href="styles/colors.css">
 <link rel="stylesheet" href="styles/mobile.css">
 <link rel="stylesheet" href="styles/desktop.css">
+<link rel="stylesheet" href="styles/defaults.css">
+<link href="https://fonts.googleapis.com/css?family=Blinker&display=swap" rel="stylesheet">
 <script src="scripts/paho-mqtt.js"></script>
 </head>
 
 <body>
     <div id="main_wrap" name="main_wrap">
-
+        <div id="hdr">
+            <h1 class="hdr">Control Panel</h1>
+        </div>
+        <div id="main">
+            <div class="stdout">
+                Devices Online<br />
+            </div>
+            <div class="stdin">
+                <div class="button" id="benchlight">
+                    <img src="media/img/lightbulb.png"  class="bulb"/>
+                    <center>Lab Overhead</center>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            <p>&copy; 2019 MyLocalTech.co<p>
+        </div>
     </div>
 </body>
 

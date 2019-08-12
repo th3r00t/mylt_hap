@@ -1,0 +1,40 @@
+$hdr_color: #2a71ac;
+@media only screen and (max-width: 900px) {
+    body {}
+    #main_wrap {
+        display: grid;
+        grid-template-rows: 10vh auto 10vh;
+        grid-template-areas: 'hdr' 'main' 'ftr';
+        min-height: 100vh;
+    }
+    #hdr {
+        grid-area: 'hdr';
+        background-color: $hdr_color;
+    }
+    #main {
+        grid-area: 'main';
+    }
+    #footer {
+        grid-area: 'ftr';
+        text-align: right;
+    }
+    h1.hdr {
+        margin: 0px;
+        min-width: 1vw;
+        text-align: center;
+    }
+    .stdout {
+        border: 1px solid green;
+        margin: 5px 0px 5px 0px;
+    }
+    .stdin {}
+    .button {
+        margin: 0px 5px 0px 5px;
+        width: 75px;
+        height: 75px;
+    }
+    .bulb {
+        width: 75px;
+        height: 75px;
+    }
+}

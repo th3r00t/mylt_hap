@@ -1,0 +1,9 @@
+$bg-color: #ffffff;
+$main-font-color: #000;
+$main-font: 'Blinker';
+body {
+    background-color: $bg-color;
+    font-family: $main-font;
+    color: $main-font-color;
+    margin: 0px;
+}
