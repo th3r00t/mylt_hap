@@ -2,5 +2,6 @@
     "terminal.integrated.env.linux": {
         "PATH": "/home/raelon/.platformio/penv/bin:/home/raelon/.platformio/penv:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/opt/android-sdk/emulator:/opt/android-ndk:/opt/android-sdk/tools:/opt/android-sdk/tools/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/var/lib/snapd/snap/bin:/home/raelon/Programs/mycroft-core/bin:/opt/android-sdk/emulator:/opt/android-ndk:/opt/android-sdk/tools:/opt/android-sdk/tools/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl",
         "PLATFORMIO_CALLER": "vscode"
-    }
+    },
+    "python.pythonPath": "/home/raelon/.virtualenvs/mqtt/bin/python"
 }
