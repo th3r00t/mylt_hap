@@ -30,14 +30,17 @@ const char* topic = "lighting/benchlight";
 
 void mqttConnect() {
   while (!mqttClient.connected()) {
-    digitalWrite(relayPin, HIGH);
     if (mqttClient.connect(hardwareId, "home", "A@2cb13")) {
-      Serial.println("Connected");
+      Serial.println("Mqtt Connected");
       mqttClient.publish(announceTopic, hardwareName);
+      Serial.println("Anonuncement Sent");
       mqttClient.subscribe(topic);
+      Serial.println("Topic Subscribed");
       digitalWrite(relayPin, LOW);
+      Serial.println("Pin Low");
     }
     else {
+      digitalWrite(relayPin, HIGH);
       Serial.print("mqtt connect failed, rc=");
       Serial.println(mqttClient.state());
     }
@@ -67,27 +70,22 @@ void lightStatus(){
 
 void callback(char* topic, byte* payload, unsigned int length){
   for (unsigned int i = 0; i < length; i++) {
-    Serial.print((char)payload[i]);
-    Serial.println();
     if (i == 0 && payload[i] == '0'){
       toggleLight();
     }
     else if (i == 0 && payload[i] == '1'){
       mqttClient.publish(topic, "1");
-      mqttClient.subscribe(topic);
     }
     else if (i == 0 && payload[i] == '2'){
       lightStatus();
     }
   }
-  
   mqttClient.subscribe(topic);
 }
 // Begin Setup
 void setup() {
   pinMode(relayPin, OUTPUT);
   Serial.begin(115200);
-  delay(10);
   mqttClient.setServer(mqtt_server, 1883);
   mqttClient.setCallback(callback);
   // Connect WiFi
@@ -103,19 +101,17 @@ void setup() {
     Serial.print(".");
   }
   Serial.println("");
-  Serial.println("WiFi connected");
-  timeClient.update();
-}
- 
-void loop() {
-  Serial.println("");
   Serial.println(WiFi.hostname());
   WiFi.printDiag(Serial);
-  while (WiFi.status() == WL_CONNECTED){
-    if (!mqttClient.connected()) {
-      mqttConnect();
-    }
-    mqttClient.loop();
+  Serial.println("");
+  Serial.println("WiFi connected");
+  timeClient.update();
+
+  if (WiFi.status() == WL_CONNECTED && !mqttClient.connected()){
+    mqttConnect();
   }
-  setup();
+}
+
+void loop() {
+  mqttClient.loop();
 }
