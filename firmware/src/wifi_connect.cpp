@@ -50,8 +50,6 @@ void mqttConnect() {
 }
 
 void toggleLight(){
-  Serial.print(hardwareId);
-  Serial.println(" toggleLight");
   if (lightState == 0){
     lightState = 1;
     digitalWrite(relayPin, HIGH);
@@ -77,7 +75,6 @@ void lightStatus(){
 void callback(char* topic, byte* payload, unsigned int length){
 
   for (unsigned int i = 0; i < length; i++) {
-    Serial.print((char)payload[i]);
     if (i == 0 && (char)payload[i] == '0'){
       toggleLight();
       msg = "Toggled";
