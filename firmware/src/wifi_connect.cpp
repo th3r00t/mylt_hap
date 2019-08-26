@@ -14,6 +14,7 @@ const int timeZone = 1;
 const int timeOffset = -(4*60*60);
 int relayPin = 5;
 int lightState = 0;
+boolean firstRun = true;
 
 
 const char* hardwareId = "DINGUS_LAB_LIGHT_2";
@@ -51,20 +52,23 @@ void toggleLight(){
   Serial.println("toggleLight");
   if (lightState == 0){
     lightState = 1;
-    digitalWrite(relayPin, LOW);
+    digitalWrite(relayPin, HIGH);
   }
   else {
     lightState = 0;
-    digitalWrite(relayPin, HIGH);
+    digitalWrite(relayPin, LOW);
+  }
+  if (firstRun){
+    firstRun = false;
   }
 }
 
 void lightStatus(){
   if (lightState == 0){
-    mqttClient.publish(topic, "0");
+    mqttClient.publish(topic, "Off");
   }
   else {
-    mqttClient.publish(topic, "1");
+    mqttClient.publish(topic, "On");
   }
 }
 
@@ -74,7 +78,7 @@ void callback(char* topic, byte* payload, unsigned int length){
       toggleLight();
     }
     else if (i == 0 && payload[i] == '1'){
-      mqttClient.publish(topic, "1");
+      mqttClient.publish(topic, "Awaiting");
     }
     else if (i == 0 && payload[i] == '2'){
       lightStatus();
