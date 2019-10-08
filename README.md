@@ -7,7 +7,3 @@
 * Wemos D1 Mini
 * Offbrand 5v charger internals
 * 5v Relays
-## Libraries
-* Paho MQTT JS Library
-  * Project Home https://www.eclipse.org/paho/clients/js/
-  * Project Docs https://www.eclipse.org/paho/files/jsdoc/index.html
