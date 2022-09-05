@@ -8,7 +8,7 @@
 //#include <ESP_EEPROM.h>
 
 const char* ssid = "MyLocalTech";
-const char* password = "a!ec4597778";
+const char* password = "";
 const char* mqtt_server = "10.0.0.2";
 const char* msg;
 const int timeZone = 1;
@@ -32,7 +32,7 @@ const char* topic = "lighting/benchlight";
 
 void mqttConnect() {
   while (!mqttClient.connected()) {
-    if (mqttClient.connect(hardwareId, "home", "A@2cb13")) {
+    if (mqttClient.connect(hardwareId, "home", "")) {
       Serial.println("Mqtt Connected");
       mqttClient.publish(announceTopic, hardwareName);
       Serial.println("Anonuncement Sent");
